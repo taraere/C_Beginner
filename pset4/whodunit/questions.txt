@@ -1,0 +1,47 @@
+1.  stdint.h is the header file that allows programmers to write portable code. This is achieved by providing a set of typedefs
+that specify exact-width integer types, and defining the minimum and maximum allowed values of each type, with the use of macros.
+
+2.  The point of using uint32_t, uint8_t, int32_t, and uint16_t in a program is to
+    These datatypes aliases for C primitive datatypes.
+
+    INT is a 32-bit signed integer
+    INT32 is a 32 bit signed integer. The first bit is the signing bit.
+    UINT8 is an 8-bit unsigned integer, so the first bit is not reserved for signing.
+    UINT16 is a 16-bit unsigned integer.
+    UINT32 is a 32-bit unsigned integer.
+
+3.  BYTE: 8 bits, 1 byte
+    DWORD: 32 bits, 4 bytes
+    LONG: 32 bits, 4 bytes
+    WORD: 16 bits, 2 bytes
+
+4.  First two bytes of any BMP file are always reserved for the Bitmap file header, which consists of 14 bytes and
+stores general information about the bitmap image file.
+    The header field to identify BMP (and DIB) files is 0x42 0x4D in hex, and BM in ASCII, which is 66 77 in decimal.
+    The first two bytes have offset hex 00, and offset decimal 0, followed by little-endian of more file-specific information.
+
+5.  bfSize: contains information about the size, in bytes, of the bitmap file
+    biSize: contains information about the size, in bytes, required by any structure
+    The difference is that the biSize is for the structures that BITMAPINFO combines, the BITMAPINFOHEADER structure and a color
+    table to offer a complete definition of the dimension and colors of a DIB, while bfSize is for the BITMAPFILEHEADER structure,
+    which provides the size of the bitmap file, in bytes.
+
+6.  If biHeight is negative, then the bitmap is a top-down DIB (Device-Independent Bitmap, which contains a color table describing
+how pixel values correspond to RGB color values so DIB can achieve the proper color scheme on any device).
+    Tod-down DIBs cannot be compressed so biCompression must be either BI_RGB or BI_BITFIELDS.
+
+
+7.  The number of bits used for each color component of a single pixel (or color of a single pixel) specifies the color depth
+of the BMP (bits per pixel).
+
+8.  fopen may return NULL in 24 and 32 of copy.c if the programmer does not have permission to access that memory, e.g. to change files.
+
+9.  The third argument of fread is always 1 in this code because there is one element (one pixel) for each byte.
+
+10. sizeof(RGBTRIPLE): gives number of bytes occupied in memory by this type of object.
+    Line 65 of copy.c assigns the value (4-(3*3)%4)%4 = 1 to the padding of bi.biWidth when it is 3.
+    No padding needed for an even number.
+
+11. fseek: sets the file position of the stream, &triple, to the offset, sizeof(RGBTRIPLE).
+
+12. SEEK_CUR: current position of the file pointer
